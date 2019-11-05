@@ -9,12 +9,14 @@ namespace OpenData.Controllers
 {
     public class ValuesController : ApiController
     {
+        [Route("api/Values/Get")]
         // GET api/values
         public IEnumerable<string> Get()
         {
             return new string[] { "value1", "value2" };
         }
 
+        [Route("api/Values/Get")]
         // GET api/values/5
         public string Get(int id)
         {
