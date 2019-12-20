@@ -25,7 +25,7 @@
      <style>
         body {
             font-family: 'Noto Sans TC', sans-serif; 
-            background-color:#00ffa2 ; /*#00ffa2;*//*#FFFFFB*/
+            /*background-color: ;*/ /*#00ffa2;*//*#FFFFFB*/
             color:#004466;
         }
 
@@ -33,11 +33,11 @@
 </head>
 <body>
 
-    <nav class="navbar is-fixed-top" role="navigation" aria-label="main navigation">
+    <nav class="navbar is-dark is-fixed-top" role="navigation" aria-label="main navigation">
         <div class="navbar-brand">
             <a href="@Url.Action("Index", "Home", new { area = "" })" class="navbar-item">
-                <img src="https://i.imgur.com/pUm2uYY.gif">
-                @*<img src="~/Assets/img/logo.png" alt="Alternate Text" />*@
+                @*<img src="https://i.imgur.com/pUm2uYY.gif">*@
+                <img src="~/Assets/img/logo.png" alt="Logo" />
             </a>
 
             <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
@@ -51,7 +51,7 @@
             <div class="navbar-start">
 
                 <a class="navbar-item">
-                    關於我們
+                    OpenData
                 </a>
 
                 <div class="navbar-item has-dropdown is-hoverable">
@@ -71,9 +71,13 @@
             </div>
 
             <div class="navbar-end">
-                <div class="navbar-item">
-
-                </div>
+				<div class="navbar-item">
+					<div class="buttons">
+						<a title="前往 GitHub" href="https://github.com/DakaoBit/OpenData" target="_blank"  class="button is-warning">
+							<strong><i class="fab fa-github-alt"></i>  GitHub</strong>
+						</a>
+					</div>
+				</div>
             </div>
         </div>
     </nav>
@@ -104,5 +108,19 @@
 
 
     @RenderSection("scripts", required: false)
+
+	<script>
+		$(document).ready(function () {
+
+			// Check for click events on the navbar burger icon
+			$(".navbar-burger").click(function () {
+
+				// Toggle the "is-active" class on both the "navbar-burger" and the "navbar-menu"
+				$(".navbar-burger").toggleClass("is-active");
+				$(".navbar-menu").toggleClass("is-active");
+
+			});
+		});
+	</script>
 </body>
 </html>

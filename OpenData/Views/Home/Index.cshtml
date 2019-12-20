@@ -1,12 +1,53 @@
-﻿ <section class="hero">
+﻿ <section class="hero is-warning">
     <div class="hero-body">
         <div class="container">
             <h1 class="title">
-                Hero title @Html.ActionLink("API", "Index", "Help", new { area = "" }, null)
+                Open Data 應用  
+				@*@Html.ActionLink("API", "Index", "Help", new { area = "" }, null)*@
             </h1>
             <h2 class="subtitle">
-                Hero subtitle
+                這是一個以政府資料開放平臺所提供的資料，作為應用的專案。
             </h2>
         </div>
     </div>
 </section>
+
+ <section class="section">
+	 <div class="container">
+	 	<h1 class="title">應用 1：空氣監測品質 AQI</h1>
+	 	<div class="columns">
+	 		<div class="column">
+				<div class="card">
+					<header class="card-header">
+						<p class="card-header-title">
+							簡介
+						</p>
+					</header>
+					<div class="card-content">
+						<div class="content">
+							<ul>
+								<li>以 Google Maps結合空氣監測資料，顯示台灣各縣市區監測站的空氣品質。</li>
+								<li>點擊單一監測站，顯示細部的監測站資訊。</li>
+							</ul>
+ 
+							<hr>
+							※運用技術：
+							<ol>
+								<li>.NET MVC</li>
+								<li>DI</li>
+								<li>JS：Google Maps</li>
+							</ol>
+						</div>
+					</div>
+					<footer class="card-footer">
+						<a href="@Url.Action("AQI", "EPA")" class="card-footer-item">前往頁面</a>
+					</footer>
+				</div>
+	 		</div>
+	 		<div class="column">
+				<img class="image" src="~/Assets/img/AQI.png" alt="Alternate Text" />
+	 		</div>
+	 	</div>
+	 	
+	 </div>
+ </section>

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using OpenData.Domain.ViewModels;
+using OpenData.Domain.ViewModels.EPA;
 using OpenData.Application.Interface;
 using OpenData.Application.Services;
 
@@ -49,8 +49,10 @@ namespace OpenData.Controllers
         public JsonResult GetAllSite()
         {
             var sites = aqiService.GetAllSite();
+			//aqiService.GetAllSite(o => o.AQI == aqi.AQI);
 
-            return Json(sites, JsonRequestBehavior.AllowGet);
+			return Json(sites, JsonRequestBehavior.AllowGet);
         }
+
     }
 }
