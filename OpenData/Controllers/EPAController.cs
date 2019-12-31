@@ -24,7 +24,11 @@ namespace OpenData.Controllers
             return View();
         }
 
-        public ActionResult AQI()
+		/// <summary>
+		/// AQI 空氣監測品質頁面
+		/// </summary>
+		/// <returns></returns>
+		public ActionResult AQI()
         {
             var aqi = aqiService.GetAllSite();
             return View(aqi);
