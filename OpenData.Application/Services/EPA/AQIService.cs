@@ -4,12 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web.Mvc;
-using OpenData.Application.Interface;
+using OpenData.Application.Interface.EPA;
 using OpenData.Domain.ViewModels.EPA;
 using RestSharp;
 using Newtonsoft.Json;
 
-namespace OpenData.Application.Services
+namespace OpenData.Application.Services.EPA
 {
     public class AQIService : IAQIService
     {

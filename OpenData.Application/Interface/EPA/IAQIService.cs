@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using OpenData.Domain.ViewModels.EPA;
 using System.Web.Mvc;
 
-namespace OpenData.Application.Interface
+namespace OpenData.Application.Interface.EPA
 {
     public interface IAQIService
     {

@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using OpenData.Domain.ViewModels.EPA;
-using OpenData.Application.Interface;
-using OpenData.Application.Services;
+using OpenData.Application.Interface.EPA;
 
 namespace OpenData.Controllers
 {
+	/// <summary>
+	/// 環保署開放資料
+	/// </summary>
     public class EPAController : Controller
     {
         private IAQIService aqiService;
