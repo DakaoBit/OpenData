@@ -27,6 +27,7 @@ namespace OpenData.Controllers
 
 		public ActionResult Airport()
 		{
+			//台灣機場
 			string[] twAirport = { "TPE", "HSZ", "RMQ", "TNN", "KHH",
 			"PIF", "TTT", "HUN", "MZG", "KNH", "MFK", "LZN" };
 

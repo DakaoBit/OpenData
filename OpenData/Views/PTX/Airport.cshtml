@@ -2,6 +2,9 @@
 @{
     ViewBag.Title = "Airport";
     Layout = "~/Views/Shared/_Layout.cshtml";
+
+	var index = 1;
+
 }
 
 <section class="section">
@@ -12,3 +15,49 @@
 	</div>
 </section>
 
+<section class="section">
+	<div class="container">
+		<div class="table-container">
+			<table id="airportTable" class="table">
+				<thead>
+					<tr>
+						<th><abbr title="ID">ID</abbr></th>
+						<th><abbr title="機場中文名稱">機場中文名稱</abbr></th>
+						<th><abbr title="機場IATA國際代碼">機場IATA國際代碼</abbr></th>
+						<th><abbr title="機場ICAO國際代碼">機場ICAO國際代碼</abbr></th>
+						<th><abbr title="機場地址">機場地址</abbr></th>
+						<th><abbr title="機場聯繫電話">機場聯繫電話</abbr></th>
+						@*<th><abbr title="緯度">緯度</abbr></th>
+		<th><abbr title="經度">經度</abbr></th>*@
+
+					</tr>
+				</thead>
+			 
+				<tbody>
+					@foreach (var item in Model)
+					{
+					<tr>
+						<th>@(index) </th>
+						<td>@item.AirportName.Zh_tw</td>
+						<td>@item.AirportID</td>
+						<td>@item.AirportICAO</td>
+						<td>@item.AirportAdrress</td>
+						<td>@item.AirportPhone</td>
+						@*<td>@item.AirportPosition.PositionLat</td>
+						  <td>@item.AirportPosition.PositionLon</td>*@
+					</tr>
+						index++;
+					}
+				</tbody>
+			</table>
+		</div>
+ 
+
+	</div>
+</section>
+
+<script>
+	$(document).ready(function () {
+		$('#airportTable').DataTable();
+	});
+</script>

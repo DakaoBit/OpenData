@@ -31,7 +31,7 @@ namespace OpenData.Domain.ViewModels.PTX
 		public Airportcityname AirportCityName { get; set; }
 
 		[Display(Name = "機場地址")]
-		public string AirportAddress { get; set; }
+		public string AirportAdrress { get; set; }
 		[Display(Name = "機場聯繫電話")]
 		public string AirportPhone { get; set; }
 		[Display(Name = "機場國籍")]
