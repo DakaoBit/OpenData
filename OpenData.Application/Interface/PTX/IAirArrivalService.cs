@@ -11,6 +11,8 @@ namespace OpenData.Application.Interface.PTX
 	{
 		List<Air_AriportViewModel> GetAllAirport();
 		//List<Air_AriportViewModel> GetAllAirport(Func<Air_AriportViewModel, bool> filter);
+		
 		List<Air_ArrivalViewModel> GetAllArrival();
+		List<Air_ArrivalViewModel> GetAllArrival(string IATA);
 	}
 }

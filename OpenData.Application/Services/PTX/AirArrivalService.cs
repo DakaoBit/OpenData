@@ -15,8 +15,10 @@ namespace OpenData.Application.Services.PTX
 	public class AirArrivalService : IAirArrivalService
 	{
 		//API Url
+		string iata = null;
 		private static string url_AirApi_Airport = "https://ptx.transportdata.tw/MOTC/v2/Air/Airport?$format=JSON";
 		private static string url_AirApi_Arrival = "https://ptx.transportdata.tw/MOTC/v2/Air/FIDS/Airport/Arrival?$format=JSON";
+ 
 		//APP ID
 		private const string APPID = "5eb5d7520a0f41369acf54ea492db156";
 		//APP Key
@@ -56,6 +58,10 @@ namespace OpenData.Application.Services.PTX
 			#endregion
 		}
 
+		/// <summary>
+		/// 取得機場資料
+		/// </summary>
+		/// <returns></returns>
 		public List<Air_AriportViewModel> GetAllAirport()
 		{
 			this.client = new RestClient(url_AirApi_Airport);
@@ -70,6 +76,10 @@ namespace OpenData.Application.Services.PTX
 			return data.ToList();
 		}
 
+		/// <summary>
+		/// 取得機場的即時入境航班
+		/// </summary>
+		/// <returns></returns>
 		public List<Air_ArrivalViewModel> GetAllArrival()
 		{
 			this.client = new RestClient(url_AirApi_Arrival);
@@ -84,5 +94,30 @@ namespace OpenData.Application.Services.PTX
 
 			return airArrival.ToList();
 		}
+
+		/// <summary>
+		/// 取得[指定機場]的即時入境航班
+		/// </summary>
+		/// <param name="IATA"></param>
+		/// <returns></returns>
+		public List<Air_ArrivalViewModel> GetAllArrival(string IATA)
+		{
+			string url_AirApi_Arrival_IATA =
+				string.Format("https://ptx.transportdata.tw/MOTC/v2/Air/FIDS/Airport/Arrival/{0}?$format=JSON", IATA);
+
+			this.client = new RestClient(url_AirApi_Arrival_IATA);
+			client.AddDefaultHeader("Authorization", sAuth);
+			client.AddDefaultHeader("x-date", xdate);
+			this.request = new RestRequest(Method.GET);
+
+			this.response = client.Execute(request);
+
+			var airArrival =
+			JsonConvert.DeserializeObject<IEnumerable<Air_ArrivalViewModel>>(response.Content);
+
+			return airArrival.ToList();
+		}
+
+		
 	}
 }

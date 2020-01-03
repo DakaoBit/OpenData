@@ -22,37 +22,60 @@
 				<thead>
 					<tr>
 						<th><abbr title="ID">ID</abbr></th>
-						<th><abbr title="機場中文名稱">機場中文名稱</abbr></th>
-						<th><abbr title="機場IATA國際代碼">機場IATA國際代碼</abbr></th>
-						<th><abbr title="機場ICAO國際代碼">機場ICAO國際代碼</abbr></th>
+						<th><abbr title="機場名稱">機場名稱</abbr></th>
+						<th><abbr title="IATA國際代碼">IATA國際代碼</abbr></th>
+						<th><abbr title="ICAO國際代碼">ICAO國際代碼</abbr></th>
 						<th><abbr title="機場地址">機場地址</abbr></th>
-						<th><abbr title="機場聯繫電話">機場聯繫電話</abbr></th>
+						<th><abbr title="聯繫電話">聯繫電話</abbr></th>
+						<th><abbr title="航班">航班</abbr></th>
 						@*<th><abbr title="緯度">緯度</abbr></th>
-		<th><abbr title="經度">經度</abbr></th>*@
+						<th><abbr title="經度">經度</abbr></th>*@
 
 					</tr>
 				</thead>
-			 
+
 				<tbody>
 					@foreach (var item in Model)
 					{
-					<tr>
-						<th>@(index) </th>
-						<td>@item.AirportName.Zh_tw</td>
-						<td>@item.AirportID</td>
-						<td>@item.AirportICAO</td>
-						<td>@item.AirportAdrress</td>
-						<td>@item.AirportPhone</td>
-						@*<td>@item.AirportPosition.PositionLat</td>
-						  <td>@item.AirportPosition.PositionLon</td>*@
-					</tr>
+						<tr>
+							<th>@(index) </th>
+							<td>@item.AirportName.Zh_tw</td>
+							<td>@item.AirportID</td>
+							<td>@item.AirportICAO</td>
+							<td><a target="_blank" title="開啟地圖" href="https://www.google.com.tw/maps/place/@item.AirportAdrress">@item.AirportAdrress</a></td>
+							<td>@item.AirportPhone</td>
+							<td>
+								<a title="觀看航班" href="@Url.Action("AirArrival", "PTX", new { IATA = item.AirportIATA })" class="button">
+									<span class="icon is-small">
+										<i class="fas fa-plane"></i>
+									</span>
+								</a>
+							</td>
+							@*<td>@item.AirportPosition.PositionLat</td>
+							<td>@item.AirportPosition.PositionLon</td>*@
+						</tr>
 						index++;
 					}
 				</tbody>
 			</table>
 		</div>
- 
 
+		<div class="modal">
+			<div class="modal-background"></div>
+			<div class="modal-card">
+				<header class="modal-card-head">
+					<p class="modal-card-title">Modal title</p>
+					<button class="delete" aria-label="close"></button>
+				</header>
+				<section class="modal-card-body">
+					<!-- Content ... -->
+				</section>
+				<footer class="modal-card-foot">
+					<button class="button is-success">Save changes</button>
+					<button class="button">Cancel</button>
+				</footer>
+			</div>
+		</div>
 	</div>
 </section>
 

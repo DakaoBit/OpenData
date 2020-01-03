@@ -37,9 +37,9 @@ namespace OpenData.Controllers
 			return View(airport);
 		}
 
-		public JsonResult AirArrival()
+		public JsonResult AirArrival(string IATA)
 		{
-			var airArrival = airArrivalService.GetAllArrival();
+			var airArrival = airArrivalService.GetAllArrival(IATA);
 		 
 			return Json(airArrival, JsonRequestBehavior.AllowGet);
 		}
