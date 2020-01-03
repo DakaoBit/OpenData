@@ -1,9 +1,10 @@
 using System;
 
 using Unity;
-using OpenData.Application.Interface;
-using OpenData.Application.Services;
-
+using OpenData.Application.Interface.EPA;
+using OpenData.Application.Services.EPA;
+using OpenData.Application.Interface.PTX;
+using OpenData.Application.Services.PTX;
 namespace OpenData
 {
     /// <summary>
@@ -46,6 +47,7 @@ namespace OpenData
             // container.RegisterType<IProductRepository, ProductRepository>();
 
             container.RegisterType<IAQIService, AQIService>();
-        }
+			container.RegisterType<IAirArrivalService, AirArrivalService>();
+		}
     }
 }

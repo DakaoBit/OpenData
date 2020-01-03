@@ -68,6 +68,8 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\EPA\AQIViewModel.cs" />
+    <Compile Include="ViewModels\PTX\Air_AriportViewModel.cs" />
+    <Compile Include="ViewModels\PTX\Air_ArrivalViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

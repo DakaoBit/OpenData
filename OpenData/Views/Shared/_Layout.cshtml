@@ -48,27 +48,43 @@
         </div>
 
         <div id="navMenu" class="navbar-menu">
-            <div class="navbar-start">
+			<div class="navbar-start">
 
-                <a class="navbar-item">
-                    OpenData
-                </a>
+				<a class="navbar-item">
+					OpenData
+				</a>
+				<!-- EPA -->
+				<div class="navbar-item has-dropdown is-hoverable">
+					<a @*href="@Url.Action("Index", "EPA")"*@ class="navbar-link">
+						EPA
+					</a>
+					<div class="navbar-dropdown">
+						<a href="@Url.Action("AQI", "EPA")" class="navbar-item">
+							空氣品質監測 AQI
+						</a>
+						<hr class="navbar-divider">
+						<a class="navbar-item">
+							Report an issue
+						</a>
+					</div>
+				</div>
 
-                <div class="navbar-item has-dropdown is-hoverable">
-                    <a @*href="@Url.Action("Index", "EPA")"*@ class="navbar-link">
-                        EPA
-                    </a>
-                    <div class="navbar-dropdown">
-                        <a href="@Url.Action("AQI", "EPA")" class="navbar-item">
-                            空氣品質監測 AQI
-                        </a>
-                        <hr class="navbar-divider">
-                        <a class="navbar-item">
-                            Report an issue
-                        </a>
-                    </div>
-                </div>
-            </div>
+				<!-- PTX -->
+				<div class="navbar-item has-dropdown is-hoverable">
+					<a class="navbar-link">
+						PTX
+					</a>
+					<div class="navbar-dropdown">
+						<a href="@Url.Action("Airport", "PTX")" class="navbar-item">
+							台灣機場即時入境航班查詢
+						</a>
+						<hr class="navbar-divider">
+						<a class="navbar-item">
+							Report an issue
+						</a>
+					</div>
+				</div>
+			</div>
 
             <div class="navbar-end">
 				<div class="navbar-item">
