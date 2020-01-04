@@ -63,7 +63,7 @@ namespace OpenData.Domain.ViewModels.PTX
 		public string CodeShare { get; set; }
 
 		[Display(Name = "是否為貨機")]
-		public bool IsCargo { get; set; }
+		public bool ㄏ { get; set; }
 
 		[Display(Name = "航空器型號")]
 		public string AcType { get; set; }

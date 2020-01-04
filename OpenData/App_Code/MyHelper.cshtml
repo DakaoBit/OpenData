@@ -1,38 +1,84 @@
 ﻿@using System.Web.Mvc;
+@using OpenData.Application.Services.PTX;
 
 @functions{
-    public static string IsLevel(string aqi)
-    {
-        if (!string.IsNullOrWhiteSpace(aqi))
-        {
-            if (!aqi.Equals(null))
-            {
-                double ratio = Convert.ToDouble(aqi);
 
-                if (ratio <= 50)
-                    return "bg_green";
+	public static string IsLevel(string aqi)
+	{
+		if (!string.IsNullOrWhiteSpace(aqi))
+		{
+			if (!aqi.Equals(null))
+			{
+				double ratio = Convert.ToDouble(aqi);
 
-                else if (50 < ratio && ratio <= 100)
-                    return "bg_yellow";
+				if (ratio <= 50)
+					return "bg_green";
 
-                else if (100 < ratio && ratio <= 150)
-                    return "bg_orange";
+				else if (50 < ratio && ratio <= 100)
+					return "bg_yellow";
 
-                else if (150 < ratio && ratio <= 200)
-                    return "bg_red";
+				else if (100 < ratio && ratio <= 150)
+					return "bg_orange";
 
-                else if (200 < ratio && ratio <= 300)
-                    return "bg_purple";
+				else if (150 < ratio && ratio <= 200)
+					return "bg_red";
 
-                else if (300 < ratio && ratio <= 400)
-                    return "bg_lakes";
+				else if (200 < ratio && ratio <= 300)
+					return "bg_purple";
 
-                else
-                    return null;
-            }
-        }
+				else if (300 < ratio && ratio <= 400)
+					return "bg_lakes";
+
+				else
+					return null;
+			}
+		}
 
 
-        return null;
-    }
+		return null;
+	}
+
+
+	/// <summary>
+	/// 取得機場資料
+	/// </summary>
+	/// <param name="airport_IATA"></param>
+	/// <param name="parameter"></param>
+	/// <returns></returns>
+	public static string GetAirportData(string airport_IATA, string parameter)
+	{
+		AirArrivalService airArrivalService = new AirArrivalService();
+		switch (parameter)
+		{
+			case "AirportNationality":
+				return airArrivalService.GetAirport(airport_IATA).AirportNationality;
+
+			case "AirportName":
+				return airArrivalService.GetAirport(airport_IATA).AirportName.Zh_tw;
+		}
+
+		return null;
+	}
+
+	/// <summary>
+	///  取得航空公司資料
+	/// </summary>
+	/// <param name="airLine_IATA"></param>
+	/// <param name="parameter"></param>
+	/// <returns></returns>
+	public static string GetAirlineData(string airLine_IATA, string parameter)
+	{
+		AirArrivalService airArrivalService = new AirArrivalService();
+		switch (parameter)
+		{
+			case "ICAO":
+				return airArrivalService.GetAirline(airLine_IATA).AirlineICAO;
+
+			case "AirlineName":
+				return airArrivalService.GetAirline(airLine_IATA).AirlineName.Zh_tw;
+
+		}
+
+		return null;
+	}
 }

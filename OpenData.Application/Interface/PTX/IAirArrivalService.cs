@@ -9,9 +9,13 @@ namespace OpenData.Application.Interface.PTX
 {
 	public interface IAirArrivalService
 	{
+		Air_AriportViewModel GetAirport(string IATA);
 		List<Air_AriportViewModel> GetAllAirport();
-		//List<Air_AriportViewModel> GetAllAirport(Func<Air_AriportViewModel, bool> filter);
 		
+		//List<Air_AriportViewModel> GetAllAirport(Func<Air_AriportViewModel, bool> filter);
+
+		Air_AirlineViewModel GetAirline(string IATA);
+
 		List<Air_ArrivalViewModel> GetAllArrival();
 		List<Air_ArrivalViewModel> GetAllArrival(string IATA);
 	}

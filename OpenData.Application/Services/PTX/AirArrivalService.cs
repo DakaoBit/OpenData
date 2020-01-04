@@ -59,6 +59,28 @@ namespace OpenData.Application.Services.PTX
 		}
 
 		/// <summary>
+		/// 取得指定機場資料
+		/// </summary>
+		/// <returns></returns>
+		public Air_AriportViewModel GetAirport(string IATA)
+		{
+			string url_AirApi_Airport_IATA =
+					string.Format("https://ptx.transportdata.tw/MOTC/v2/Air/Airport/{0}?$format=JSON", IATA);
+
+			this.client = new RestClient(url_AirApi_Airport_IATA);
+			client.AddDefaultHeader("Authorization", sAuth);
+			client.AddDefaultHeader("x-date", xdate);
+			this.request = new RestRequest(Method.GET);
+
+			this.response = client.Execute(request);
+
+			var airport =
+			JsonConvert.DeserializeObject<Air_AriportViewModel>(response.Content);
+
+			return airport;
+		}
+
+		/// <summary>
 		/// 取得機場資料
 		/// </summary>
 		/// <returns></returns>
@@ -96,14 +118,14 @@ namespace OpenData.Application.Services.PTX
 		}
 
 		/// <summary>
-		/// 取得[指定機場]的即時入境航班
+		/// 取得指定機場的即時入境航班
 		/// </summary>
 		/// <param name="IATA"></param>
 		/// <returns></returns>
 		public List<Air_ArrivalViewModel> GetAllArrival(string IATA)
 		{
 			string url_AirApi_Arrival_IATA =
-				string.Format("https://ptx.transportdata.tw/MOTC/v2/Air/FIDS/Airport/Arrival/{0}?$format=JSON", IATA);
+				string.Format("https://ptx.transportdata.tw/MOTC/v2/Air/FIDS/Airport/Arrival/{0}?$top=10&$format=JSON", IATA);
 
 			this.client = new RestClient(url_AirApi_Arrival_IATA);
 			client.AddDefaultHeader("Authorization", sAuth);
@@ -118,6 +140,29 @@ namespace OpenData.Application.Services.PTX
 			return airArrival.ToList();
 		}
 
-		
+		/// <summary>
+		/// 取得指定航空公司資料
+		/// </summary>
+		/// <param name="IATA"></param>
+		/// <returns></returns>
+		public Air_AirlineViewModel GetAirline(string IATA)
+		{
+			string url_AirApi_Airline_IATA =
+					string.Format("https://ptx.transportdata.tw/MOTC/v2/Air/Airline/{0}?$format=JSON", IATA);
+
+			this.client = new RestClient(url_AirApi_Airline_IATA);
+			client.AddDefaultHeader("Authorization", sAuth);
+			client.AddDefaultHeader("x-date", xdate);
+			this.request = new RestRequest(Method.GET);
+
+			this.response = client.Execute(request);
+
+			var airline =
+			JsonConvert.DeserializeObject<Air_AirlineViewModel>(response.Content);
+
+			return airline;
+		}
+
+
 	}
 }
