@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.960
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenData", "OpenData\OpenData.csproj", "{7DFD35D1-EA41-4C01-B96A-F7AB61B22996}"
 	ProjectSection(ProjectDependencies) = postProject
@@ -14,6 +14,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenData.Application", "Ope
 	ProjectSection(ProjectDependencies) = postProject
 		{CE1CA261-549B-46B4-882A-0F7CA3BA375A} = {CE1CA261-549B-46B4-882A-0F7CA3BA375A}
 	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenData.ApplicationTests", "OpenData.ApplicationTests\OpenData.ApplicationTests.csproj", "{C7DF98FD-AE96-4582-B580-E2D33EE21AE6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,8 +35,15 @@ Global
 		{4F8A2E99-1F37-499A-9474-70B80AF23C5C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4F8A2E99-1F37-499A-9474-70B80AF23C5C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4F8A2E99-1F37-499A-9474-70B80AF23C5C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C7DF98FD-AE96-4582-B580-E2D33EE21AE6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C7DF98FD-AE96-4582-B580-E2D33EE21AE6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C7DF98FD-AE96-4582-B580-E2D33EE21AE6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C7DF98FD-AE96-4582-B580-E2D33EE21AE6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {C27818F7-B5CF-4EF1-9E98-B269BD80A0D4}
 	EndGlobalSection
 EndGlobal

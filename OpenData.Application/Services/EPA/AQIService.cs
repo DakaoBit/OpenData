@@ -25,13 +25,22 @@ namespace OpenData.Application.Services.EPA
             this.response = client.Execute(request);
         }
 
-        public AQIViewModel GetSite(Func<AQIViewModel, bool> filter)
+		/// <summary>
+		/// 取得單一監測站資料
+		/// </summary>
+		/// <param name="filter"></param>
+		/// <returns></returns>
+		public AQIViewModel GetSite(Func<AQIViewModel, bool> filter)
         {
             var aqi = JsonConvert.DeserializeObject<IEnumerable<AQIViewModel>>(response.Content);
 
             return aqi.Where(filter).FirstOrDefault();
         }
 
+		/// <summary>
+		/// 取得所有監測站資料
+		/// </summary>
+		/// <returns></returns>
         public List<AQIViewModel> GetAllSite()
         {
             var aqi = JsonConvert.DeserializeObject<IEnumerable<AQIViewModel>>(response.Content);
@@ -39,14 +48,23 @@ namespace OpenData.Application.Services.EPA
             return aqi.ToList();
         }
 
-        public List<AQIViewModel> GetAllSite(Func<AQIViewModel, bool> filter)
+		/// <summary>
+		/// 取得所有監測站資料
+		/// </summary>
+		/// <param name="filter"></param>
+		/// <returns></returns>
+		public List<AQIViewModel> GetAllSite(Func<AQIViewModel, bool> filter)
         {
             var aqi = JsonConvert.DeserializeObject<IEnumerable<AQIViewModel>>(response.Content);
 
             return aqi.Where(filter).ToList();
         }
 
-        public List<SelectListItem> GetCountyOption()
+		/// <summary>
+		/// 將各監測站所屬城市 to SelectListItem
+		/// </summary>
+		/// <returns></returns>
+		public List<SelectListItem> GetCountyOption()
         {
             var aqi = JsonConvert.DeserializeObject<IEnumerable<AQIViewModel>>(response.Content);
 
