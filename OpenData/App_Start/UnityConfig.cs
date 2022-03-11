@@ -5,6 +5,9 @@ using OpenData.Application.Interface.EPA;
 using OpenData.Application.Services.EPA;
 using OpenData.Application.Interface.PTX;
 using OpenData.Application.Services.PTX;
+using OpenData.Application.Interface.MED;
+using OpenData.Application.Services.MED;
+
 namespace OpenData
 {
     /// <summary>
@@ -48,6 +51,7 @@ namespace OpenData
 
             container.RegisterType<IAQIService, AQIService>();
 			container.RegisterType<IAirArrivalService, AirArrivalService>();
+            container.RegisterType<IMedicineService, AnimalMedService>();
 		}
     }
 }
