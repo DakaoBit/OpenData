@@ -1,0 +1,153 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="OpenDataModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="XT_AnimalMedicine">
+          <Key>
+            <PropertyRef Name="PK" />
+          </Key>
+          <Property Name="PK" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="LicenseNum" Type="nvarchar" MaxLength="20" />
+          <Property Name="ChName" Type="nvarchar" MaxLength="50" />
+          <Property Name="EnName" Type="nvarchar" MaxLength="50" />
+          <Property Name="CompanyName" Type="nvarchar" MaxLength="50" />
+          <Property Name="CompanyAddress" Type="nvarchar" MaxLength="150" />
+          <Property Name="FactoryName" Type="nvarchar" MaxLength="50" />
+          <Property Name="FactoryAddress" Type="nvarchar" MaxLength="150" />
+          <Property Name="DosageForm" Type="nvarchar" MaxLength="50" />
+          <Property Name="Package" Type="nvarchar" MaxLength="200" />
+          <Property Name="Indications" Type="nvarchar" MaxLength="3000" />
+          <Property Name="Element" Type="nvarchar" MaxLength="1000" />
+          <Property Name="IssueDate" Type="nvarchar" MaxLength="150" />
+          <Property Name="ValidPeriod" Type="nvarchar" MaxLength="150" />
+          <Property Name="ForExport" Type="bit" Nullable="false" />
+          <Property Name="CreateUser" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="CreateDate" Type="datetime" Nullable="false" />
+          <Property Name="EditUser" Type="nvarchar" MaxLength="10" />
+          <Property Name="EditDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="XT_User">
+          <Key>
+            <PropertyRef Name="PK" />
+          </Key>
+          <Property Name="PK" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserID" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="Password" Type="varchar" MaxLength="6" Nullable="false" />
+          <Property Name="Email" Type="varchar" MaxLength="15" />
+        </EntityType>
+        <EntityContainer Name="OpenDataModelStoreContainer">
+          <EntitySet Name="XT_AnimalMedicine" EntityType="Self.XT_AnimalMedicine" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="XT_User" EntityType="Self.XT_User" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="OpenDataModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="XT_User">
+          <Key>
+            <PropertyRef Name="PK" />
+          </Key>
+          <Property Name="PK" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserID" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="6" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityContainer Name="OpenDataEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="XT_User" EntityType="Self.XT_User" />
+          <EntitySet Name="XT_AnimalMedicine" EntityType="OpenDataModel.XT_AnimalMedicine" />
+        </EntityContainer>
+        <EntityType Name="XT_AnimalMedicine">
+          <Key>
+            <PropertyRef Name="PK" />
+          </Key>
+          <Property Name="PK" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="LicenseNum" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="ChName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="EnName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CompanyName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CompanyAddress" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="FactoryName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="FactoryAddress" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="DosageForm" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Package" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Indications" Type="String" MaxLength="3000" FixedLength="false" Unicode="true" />
+          <Property Name="Element" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="IssueDate" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="ValidPeriod" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="ForExport" Type="Boolean" Nullable="false" />
+          <Property Name="CreateUser" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="EditUser" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="EditDate" Type="DateTime" Precision="3" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="OpenDataModelStoreContainer" CdmEntityContainer="OpenDataEntities">
+          <EntitySetMapping Name="XT_User">
+            <EntityTypeMapping TypeName="OpenDataModel.XT_User">
+              <MappingFragment StoreEntitySet="XT_User">
+                <ScalarProperty Name="PK" ColumnName="PK" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="XT_AnimalMedicine">
+            <EntityTypeMapping TypeName="OpenDataModel.XT_AnimalMedicine">
+              <MappingFragment StoreEntitySet="XT_AnimalMedicine">
+                <ScalarProperty Name="EditDate" ColumnName="EditDate" />
+                <ScalarProperty Name="EditUser" ColumnName="EditUser" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="CreateUser" ColumnName="CreateUser" />
+                <ScalarProperty Name="ForExport" ColumnName="ForExport" />
+                <ScalarProperty Name="ValidPeriod" ColumnName="ValidPeriod" />
+                <ScalarProperty Name="IssueDate" ColumnName="IssueDate" />
+                <ScalarProperty Name="Element" ColumnName="Element" />
+                <ScalarProperty Name="Indications" ColumnName="Indications" />
+                <ScalarProperty Name="Package" ColumnName="Package" />
+                <ScalarProperty Name="DosageForm" ColumnName="DosageForm" />
+                <ScalarProperty Name="FactoryAddress" ColumnName="FactoryAddress" />
+                <ScalarProperty Name="FactoryName" ColumnName="FactoryName" />
+                <ScalarProperty Name="CompanyAddress" ColumnName="CompanyAddress" />
+                <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
+                <ScalarProperty Name="EnName" ColumnName="EnName" />
+                <ScalarProperty Name="ChName" ColumnName="ChName" />
+                <ScalarProperty Name="LicenseNum" ColumnName="LicenseNum" />
+                <ScalarProperty Name="PK" ColumnName="PK" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="無" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

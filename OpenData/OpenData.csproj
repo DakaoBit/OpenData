@@ -189,6 +189,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Areas\Backend\Data\" />
+    <Folder Include="Areas\Backend\Views\Auth\" />
+    <Folder Include="Areas\Backend\Views\Shared\" />
     <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
@@ -198,6 +201,8 @@
     <Compile Include="App_Start\UnityConfig.cs" />
     <Compile Include="App_Start\UnityMvcActivator.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Areas\Backend\BackendAreaRegistration.cs" />
+    <Compile Include="Areas\Backend\Controllers\AuthController.cs" />
     <Compile Include="Areas\HelpPage\ApiDescriptionExtensions.cs" />
     <Compile Include="Areas\HelpPage\App_Start\HelpPageConfig.cs" />
     <Compile Include="Areas\HelpPage\Controllers\HelpController.cs" />
@@ -231,6 +236,7 @@
     <Compile Include="Controllers\MedicineController.cs" />
     <Compile Include="Controllers\PTXController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
+    <Compile Include="Filters\AuthAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -274,6 +280,8 @@
     </Content>
     <Content Include="App_Code\MyHelper.cshtml" />
     <Content Include="App_Data\AnimalMedicine.json" />
+    <Content Include="App_Data\AnimalMedicine1.json" />
+    <Content Include="Areas\Backend\Views\web.config" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -299,6 +307,8 @@
     <Content Include="Views\PTX\Airport.cshtml" />
     <Content Include="Views\PTX\AirArrival.cshtml" />
     <Content Include="Views\Medicine\Index.cshtml" />
+    <Content Include="Views\Medicine\Login.cshtml" />
+    <Content Include="Views\Medicine\Register.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\OpenData.Application\OpenData.Application.csproj">

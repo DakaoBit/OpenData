@@ -1,0 +1,64 @@
+﻿@model OpenData.Domain.ViewModels.Medicine.UserRegisterViewModel
+
+@{
+    ViewBag.Title = "Register";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<section class="section is-medium">
+    <div class="columns">
+        <div class="column">
+        </div>
+        <div class="column">
+            @using (Html.BeginForm("Register", "Medicine", new { area = "" }, FormMethod.Post))
+            {
+                @Html.AntiForgeryToken()
+
+                <div class="field">
+                    @Html.LabelFor(model => model.UserID, htmlAttributes: new { @class = "label" })
+                    <div class="control">
+                        @Html.EditorFor(model => model.UserID, new { htmlAttributes = new { @class = "input", @placeholder = "請輸入帳號" } })
+                        @Html.ValidationMessageFor(model => model.UserID, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="field">
+                    @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "label" })
+                    <div class="control">
+                        @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "input", @placeholder = "請輸入中文名稱" } })
+                        @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="field">
+                    @Html.LabelFor(model => model.NewPassword, htmlAttributes: new { @class = "label" })
+                    <div class="control">
+                        @Html.TextBoxFor(m => m.NewPassword, "", new { @class = "input", @placeholder = "請輸入密碼" })
+                        @Html.ValidationMessageFor(model => model.NewPassword, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="field">
+                    @Html.LabelFor(model => model.ConfirmPassword, htmlAttributes: new { @class = "label" })
+                    <div class="control">
+                        @Html.TextBoxFor(m => m.ConfirmPassword, "", new { @class = "input", @placeholder = "請重新輸入密碼" })
+                        @Html.ValidationMessageFor(model => model.ConfirmPassword, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="field">
+                    @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "label" })
+                    <div class="control">
+                        @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "input", @placeholder = "請輸入電子郵件" } })
+                        @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <br />
+                <div class="field is-grouped">
+                    <div class="control">
+                        <button type="submit" class="button is-warning">註冊</button>
+                    </div>
+                </div>
+
+            }
+        </div>
+        <div class="column">
+        </div>
+    </div>
+</section>

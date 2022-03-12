@@ -10,6 +10,7 @@ namespace OpenData.Application.Interface.MED
 {
     public interface IMedicineService
     {
+        void AddMedicine(IEnumerable<AnimalMedViewModel> viewModel);
         AnimalMedViewModel GetMedicine(Func<AnimalMedViewModel, bool> filter);
         List<AnimalMedViewModel> GetMedicines();
         List<AnimalMedViewModel> GetMedicines(Func<AnimalMedViewModel, bool> filter);

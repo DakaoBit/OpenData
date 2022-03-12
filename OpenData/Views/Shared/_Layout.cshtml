@@ -17,135 +17,142 @@
 	@*@Styles.Render("~/Content/css")*@
 	<link href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.min.css" rel="stylesheet" />
 	<link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/css/bootstrap-grid.min.css" rel="stylesheet" />
-	<link href="~/Assets/css/style.css" rel="stylesheet" />
+    <link href="~/Assets/css/style.css" rel="stylesheet" />
 	<link href="https://fonts.googleapis.com/css?family=Noto+Sans+TC&display=swap" rel="stylesheet">
 	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.2/css/all.min.css" rel="stylesheet" />
 	<!-- datatables css -->
 	<link href="http://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css" rel="stylesheet" />
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-	<style>
-		body {
-			font-family: 'Noto Sans TC', sans-serif;
-			/*background-color: ;*/ /*#00ffa2;*/ /*#FFFFFB*/
-			color: #004466;
-		}
+    <style>
+        body {
+            font-family: 'Noto Sans TC', sans-serif;
+            /*background-color: ;*/ /*#00ffa2;*/ /*#FFFFFB*/
+            color: #004466;
+        }
+
+        .text-danger {
+            color: darkred;
+        }
+ 
 	</style>
 </head>
 <body>
 
-	<nav class="navbar is-dark is-fixed-top" role="navigation" aria-label="main navigation">
-		<div class="navbar-brand">
-			<a href="@Url.Action("Index", "Home", new { area = "" })" class="navbar-item">
-				@*<img src="https://i.imgur.com/pUm2uYY.gif">*@
-				<img src="~/Assets/img/logo.png" alt="Logo" />
-			</a>
+    <nav class="navbar is-dark is-fixed-top" role="navigation" aria-label="main navigation">
+        <div class="navbar-brand">
+            <a href="@Url.Action("Index", "Home", new { area = "" })" class="navbar-item">
+                @*<img src="https://i.imgur.com/pUm2uYY.gif">*@
+                <img src="~/Assets/img/logo.png" alt="Logo" />
+            </a>
 
-			<a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
-				<span aria-hidden="true"></span>
-				<span aria-hidden="true"></span>
-				<span aria-hidden="true"></span>
-			</a>
-		</div>
+            <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+            </a>
+        </div>
 
-		<div id="navMenu" class="navbar-menu">
-			<div class="navbar-start">
+        <div id="navMenu" class="navbar-menu">
+            <div class="navbar-start">
 
-				<a class="navbar-item">
-					OpenData
-				</a>
-				
+                <a class="navbar-item">
+                    OpenData
+                </a>
+
                 <div class="navbar-item has-dropdown is-hoverable">
                     <a @*href="@Url.Action("Index", "EPA")"*@ class="navbar-link">
                         其他API應用
                     </a>
-                   
+
                     <div class="navbar-dropdown">
                         <!-- EPA -->
-                        <a href="@Url.Action("AQI", "EPA")" class="navbar-item">
+                        <a href="@Url.Action("AQI", "EPA", new { area="" })" class="navbar-item">
                             (環保署)空氣品質監測 AQI
                         </a>
                         <hr class="navbar-divider">
                         <!-- PTX -->
-                        <a href="@Url.Action("Airport", "PTX")" class="navbar-item">
+                        <a href="@Url.Action("Airport", "PTX", new { area="" })" class="navbar-item">
                             (公共運輸平台)台灣機場即時入境航班查詢
                         </a>
                         @*<a class="navbar-item">
-                            Report an issue
-                        </a>*@
+                                Report an issue
+                            </a>*@
                     </div>
                 </div>
 
-				
-				<div class="navbar-item has-dropdown is-hoverable">
-					<a class="navbar-link">
-						醫療
-					</a>
-					<div class="navbar-dropdown">
-						<a href="@Url.Action("Index", "Medicine")" class="navbar-item">
-							動物用藥資訊
-						</a>
-						@*<hr class="navbar-divider">
-						<a class="navbar-item">
-							Report an issue
-						</a>*@
-					</div>
-				</div>
-			</div>
 
-			<div class="navbar-end">
-				<div class="navbar-item">
-					<div class="buttons">
-						<a title="前往 GitHub" href="https://github.com/DakaoBit/OpenData" target="_blank" class="button is-warning">
-							<strong><i class="fab fa-github-alt"></i>  GitHub</strong>
-						</a>
-					</div>
-				</div>
-			</div>
-		</div>
-	</nav>
-	<div style="margin-top:50px">
-		@RenderBody()
-	</div>
-	<footer class="has-background-grey-light">
-		<div class="container">
-			<div class="content columns">
-				<div class="column is-half">
-					<p class="subtitle has-text-dark">
-						資源來源：<a target="_blank" href="https://data.gov.tw/">
-							政府資料開放平臺
-						</a>
+                <div class="navbar-item has-dropdown is-hoverable">
+                    <a class="navbar-link">
+                        醫療
+                    </a>
+                    <div class="navbar-dropdown">
+                        <a href="@Url.Action("Index", "Medicine", new { area="" })" class="navbar-item">
+                            動物用藥資訊
+                        </a>
+                        @*<hr class="navbar-divider">
+                            <a class="navbar-item">
+                                Report an issue
+                            </a>*@
+                    </div>
+                </div>
+            </div>
 
-					</p>
-				</div>
+            <div class="navbar-end">
+                <div class="navbar-item">
+                    <div class="buttons">
+                        <a href="@Url.Action("Login", "Medicine", new { area=""})" class="button is-warning">
+                            <strong><i class="fa fa-user"></i>  登入</strong>
+                        </a>
+                        @*<a title="前往 GitHub" href="https://github.com/DakaoBit/OpenData" target="_blank" class="button is-warning">
+                            <strong><i class="fab fa-github-alt"></i>  GitHub</strong>
+                        </a>*@
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <div style="margin-top:50px">
+        @RenderBody()
+    </div>
+    <footer class="has-background-grey-light">
+        <div class="container">
+            <div class="content columns">
+                <div class="column is-half">
+                    <p class="subtitle has-text-dark">
+                        資源來源：<a target="_blank" href="https://data.gov.tw/">
+                            政府資料開放平臺
+                        </a>
 
-				<div class="column is-half has-text-right">
-					<p class="subtitle has-text-dark">
-						Copyright © @DateTime.Now.Year DakaoBit. All rights reserved.
-					</p>
-				</div>
-			</div>
-		</div>
+                    </p>
+                </div>
 
-	</footer>
+                <div class="column is-half has-text-right">
+                    <p class="subtitle has-text-dark">
+                        Copyright © @DateTime.Now.Year DakaoBit. All rights reserved.
+                    </p>
+                </div>
+            </div>
+        </div>
 
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
-	
-	<!-- datatables js -->
-	<script src="http://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
-	@RenderSection("scripts", required: false)
+    </footer>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
 
-	<script>
-		$(document).ready(function () {
+    <!-- datatables js -->
+    <script src="http://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+    @RenderSection("scripts", required: false)
 
-			// Check for click events on the navbar burger icon
-			$(".navbar-burger").click(function () {
+    <script>
+        $(document).ready(function () {
 
-				// Toggle the "is-active" class on both the "navbar-burger" and the "navbar-menu"
-				$(".navbar-burger").toggleClass("is-active");
-				$(".navbar-menu").toggleClass("is-active");
+            // Check for click events on the navbar burger icon
+            $(".navbar-burger").click(function () {
 
-			});
-		});
-	</script>
+                // Toggle the "is-active" class on both the "navbar-burger" and the "navbar-menu"
+                $(".navbar-burger").toggleClass("is-active");
+                $(".navbar-menu").toggleClass("is-active");
+
+            });
+        });
+    </script>
 </body>
 </html>
