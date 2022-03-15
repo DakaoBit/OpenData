@@ -5,14 +5,14 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-
+@MyHelper.ExecuteResultAlert(TempData["ExecuteResult"] as OpenData.Domain.ViewModels.Medicine.ExecuteResultModel)
 
 <section class="section is-medium">
     <div class="columns">
         <div class="column">
         </div>
         <div class="column">
-            @using (Html.BeginForm("Login", "Medicine", new { area = "" }, FormMethod.Post))
+            @using (Html.BeginForm("Login", "Medicine", new { area = "" }, FormMethod.Post, new {@class="box" }))
             {
                 @Html.AntiForgeryToken()
 
@@ -26,7 +26,7 @@
                 <div class="field">
                     @Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "label" })
                     <div class="control">
-                        @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "input", @placeholder = "請輸入密碼" } })
+                        @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "input", @placeholder = "請輸入密碼", @type = "password" } })
                         @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
                     </div>
                 </div>

@@ -17,7 +17,7 @@ namespace OpenData.Areas.Backend
             context.MapRoute(
                 "Backend_default",
                 "Backend/{controller}/{action}/{id}",
-                new { area = "Backend", controller = "Auth", action = "Login", id = UrlParameter.Optional }
+                new { area = "Backend", controller = "Auth", action = "Index", id = UrlParameter.Optional }
             );
         }
     }

@@ -190,9 +190,9 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Areas\Backend\Data\" />
-    <Folder Include="Areas\Backend\Views\Auth\" />
     <Folder Include="Areas\Backend\Views\Shared\" />
     <Folder Include="Models\" />
+    <Folder Include="Views\Base\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
@@ -231,15 +231,19 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\SampleDirection.cs" />
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
+    <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\EPAController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MedicineController.cs" />
     <Compile Include="Controllers\PTXController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
+    <Compile Include="CustomResults\JsonNetResult.cs" />
     <Compile Include="Filters\AuthAttribute.cs" />
+    <Compile Include="Filters\ModelStateExcludeAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\GeneralHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -282,6 +286,8 @@
     <Content Include="App_Data\AnimalMedicine.json" />
     <Content Include="App_Data\AnimalMedicine1.json" />
     <Content Include="Areas\Backend\Views\web.config" />
+    <Content Include="Areas\Backend\Views\Auth\Index.cshtml" />
+    <Content Include="Areas\Backend\Views\Auth\Edit.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -309,6 +315,8 @@
     <Content Include="Views\Medicine\Index.cshtml" />
     <Content Include="Views\Medicine\Login.cshtml" />
     <Content Include="Views\Medicine\Register.cshtml" />
+    <Content Include="Views\Medicine\Detail.cshtml" />
+    <Content Include="Views\Medicine\InfiniteResult.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\OpenData.Application\OpenData.Application.csproj">

@@ -1,0 +1,75 @@
+﻿@model OpenData.Domain.ViewModels.Medicine.AnimalMedViewModel
+@using OpenData.Helpers;
+@{
+    ViewBag.Title = "Detail";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<section class="hero is-warning">
+    <div class="hero-body">
+        <p class="title">
+            @Model.ChName
+        </p>
+        <p class="subtitle">
+            @Model.EnName
+        </p>
+    </div>
+</section>
+
+<section class="section">
+
+    <div class="container">
+        <div class="columns">
+            <div class="column">
+
+            </div>
+            <div class="column is-6">
+                <div class="card">
+                    @*<div class="card-image">
+                <figure class="image">
+                    <img src="@MyHelper.GetImgUrl("800","200",Model.ChName)" alt="Placeholder image">
+                </figure>
+            </div>*@
+                    <div class="card-content">
+                        <div class="media">
+                            <div class="media-left">
+                                <figure class="image">
+                                    <img src="@MyHelper.GetImgUrl("48","48","User")" alt="Placeholder image">
+                                </figure>
+                            </div>
+                            <div class="media-content">
+                                <p class="title is-2">建立者: @Model.CreateUser</p>
+                                <p class="subtitle is-3">建立日期: @Model.CreateDate.ChangeTaiwanCalendar("y年 MM月 dd日")</p>
+                            </div>
+                        </div>
+
+                        <div class="content">
+                            <h4>效能適應症</h4>
+                            @Html.Raw(HttpUtility.HtmlDecode(Model.Indications))
+
+                            <hr />
+                            <h4>成分</h4>
+                            @Html.HightLightText(Model.Element)
+                            <hr />
+                            <h5>劑型: @Model.DosageForm</h5>
+                            <h5>包裝: @Model.Package</h5>
+                            <hr />
+                            <h5>核發日期: @Model.IssueDate</h5>
+                            <h5>有效期間: @Model.ValidPeriod</h5>
+                            <h5>外銷專用: @MyHelper.StrForExport(Model.ForExport)</h5>
+                        </div>
+                        <footer class="card-footer">
+                            <a href="#" class="card-footer-item">公司資料</a>
+                            <a href="#" class="card-footer-item">Link1</a>
+                        </footer>
+                    </div>
+                </div>
+            </div>
+            <div class="column">
+
+            </div>
+        </div>
+          
+    </div>
+</section>
+

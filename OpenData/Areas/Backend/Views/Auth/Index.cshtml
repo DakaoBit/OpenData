@@ -1,0 +1,94 @@
+﻿@model IEnumerable<OpenData.Domain.ViewModels.Medicine.AnimalMedViewModel>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var i = 1;
+}
+
+@MyHelper.ExecuteResultAlert(TempData["ExecuteResult"] as OpenData.Domain.ViewModels.Medicine.ExecuteResultModel)
+
+<section class="hero is-warning">
+    <div class="hero-body">
+        <p class="title">
+            動物用藥資訊列表
+        </p>
+    </div>
+</section>
+<section class="section">
+    <div class="container">
+        <div class="card">
+            <div class="card-content">
+                <table id="table" class="table">
+                    <thead>
+                        <tr>
+                            <th><abbr title="">#</abbr></th>
+                            <th><abbr title="許可證字號">許可證字號</abbr></th>
+                            <th><abbr title="動物用藥品中文名稱">動物用藥品中文名稱</abbr></th>
+                            <th><abbr title="動物用藥品英文名稱">動物用藥品英文名稱</abbr></th>
+                            <th><abbr title="業者名稱">業者名稱</abbr></th>
+                            <th><abbr title="核發日期">核發日期</abbr></th>
+                            <th><abbr title="功能">功能</abbr></th>
+                        </tr>
+                    </thead>
+                    <tfoot>
+                        <tr>
+                            <th><abbr title="">#</abbr></th>
+                            <th><abbr title="許可證字號">許可證字號</abbr></th>
+                            <th><abbr title="動物用藥品中文名稱">動物用藥品中文名稱</abbr></th>
+                            <th><abbr title="動物用藥品英文名稱">動物用藥品英文名稱</abbr></th>
+                            <th><abbr title="業者名稱">業者名稱</abbr></th>
+                            <th><abbr title="核發日期">核發日期</abbr></th>
+                            <th><abbr title="功能">功能</abbr></th>
+                        </tr>
+                    </tfoot>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <th>@(i++)</th>
+                                <td>@item.LicenseNum</td>
+                                <td>@item.ChName</td>
+                                <td>@item.EnName</td>
+                                <td>@item.CompanyName</td>
+                                <td>@item.IssueDate</td>
+                                <td>
+                                    <a href="@Url.Action("Edit", "Auth", new { area="Backend", id=item.PK })" class="button is-small">編輯</a>
+                                    <a href="@Url.Action("Delete", "Auth", new { area="Backend", id=item.PK })" class="button is-small">刪除</a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $('#table').DataTable({
+            //"order": [[0, 'desc']],
+            //"columnDefs": [
+            //    { "width": "5%", "targets": 0 },
+            //    { "orderable": false, "targets": [0, 1, 2, 3, 4, 7, 8] }
+            //],
+            "language": {
+                "lengthMenu": "每頁播放 _MENU_ 筆資料",
+                "search": "搜尋:",
+                "zeroRecords": "搜尋不到任何相關資料",
+                "info": "頁數 _PAGE_ of _PAGES_",
+                "infoEmpty": "無相關資料",
+                "infoFiltered": "(已從 _MAX_ 筆資料中過濾)",
+                "paginate": {
+                    "first": "First",
+                    "last": "Last",
+                    "next": "往後",
+                    "previous": "往前"
+                },
+
+            }
+
+        });
+    });
+</script>

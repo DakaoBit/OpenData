@@ -1,84 +1,152 @@
 ﻿@using System.Web.Mvc;
 @using OpenData.Application.Services.PTX;
+@using OpenData.Domain.ViewModels.Medicine;
 
 @functions{
 
-	public static string IsLevel(string aqi)
-	{
-		if (!string.IsNullOrWhiteSpace(aqi))
-		{
-			if (!aqi.Equals(null))
-			{
-				double ratio = Convert.ToDouble(aqi);
+    public static string IsLevel(string aqi)
+    {
+        if (!string.IsNullOrWhiteSpace(aqi))
+        {
+            if (!aqi.Equals(null))
+            {
+                double ratio = Convert.ToDouble(aqi);
 
-				if (ratio <= 50)
-					return "bg_green";
+                if (ratio <= 50)
+                    return "bg_green";
 
-				else if (50 < ratio && ratio <= 100)
-					return "bg_yellow";
+                else if (50 < ratio && ratio <= 100)
+                    return "bg_yellow";
 
-				else if (100 < ratio && ratio <= 150)
-					return "bg_orange";
+                else if (100 < ratio && ratio <= 150)
+                    return "bg_orange";
 
-				else if (150 < ratio && ratio <= 200)
-					return "bg_red";
+                else if (150 < ratio && ratio <= 200)
+                    return "bg_red";
 
-				else if (200 < ratio && ratio <= 300)
-					return "bg_purple";
+                else if (200 < ratio && ratio <= 300)
+                    return "bg_purple";
 
-				else if (300 < ratio && ratio <= 400)
-					return "bg_lakes";
+                else if (300 < ratio && ratio <= 400)
+                    return "bg_lakes";
 
-				else
-					return null;
-			}
-		}
-
-
-		return null;
-	}
+                else
+                    return null;
+            }
+        }
 
 
-	/// <summary>
-	/// 取得機場資料
-	/// </summary>
-	/// <param name="airport_IATA"></param>
-	/// <param name="parameter"></param>
-	/// <returns></returns>
-	public static string GetAirportData(string airport_IATA, string parameter)
-	{
-		AirArrivalService airArrivalService = new AirArrivalService();
-		switch (parameter)
-		{
-			case "AirportNationality":
-				return airArrivalService.GetAirport(airport_IATA).AirportNationality;
+        return null;
+    }
 
-			case "AirportName":
-				return airArrivalService.GetAirport(airport_IATA).AirportName.Zh_tw;
-		}
 
-		return null;
-	}
+    /// <summary>
+    /// 取得機場資料
+    /// </summary>
+    /// <param name="airport_IATA"></param>
+    /// <param name="parameter"></param>
+    /// <returns></returns>
+    public static string GetAirportData(string airport_IATA, string parameter)
+    {
+        AirArrivalService airArrivalService = new AirArrivalService();
+        switch (parameter)
+        {
+            case "AirportNationality":
+                return airArrivalService.GetAirport(airport_IATA).AirportNationality;
 
-	/// <summary>
-	///  取得航空公司資料
-	/// </summary>
-	/// <param name="airLine_IATA"></param>
-	/// <param name="parameter"></param>
-	/// <returns></returns>
-	public static string GetAirlineData(string airLine_IATA, string parameter)
-	{
-		AirArrivalService airArrivalService = new AirArrivalService();
-		switch (parameter)
-		{
-			case "ICAO":
-				return airArrivalService.GetAirline(airLine_IATA).AirlineICAO;
+            case "AirportName":
+                return airArrivalService.GetAirport(airport_IATA).AirportName.Zh_tw;
+        }
 
-			case "AirlineName":
-				return airArrivalService.GetAirline(airLine_IATA).AirlineName.Zh_tw;
+        return null;
+    }
 
-		}
+    /// <summary>
+    ///  取得航空公司資料
+    /// </summary>
+    /// <param name="airLine_IATA"></param>
+    /// <param name="parameter"></param>
+    /// <returns></returns>
+    public static string GetAirlineData(string airLine_IATA, string parameter)
+    {
+        AirArrivalService airArrivalService = new AirArrivalService();
+        switch (parameter)
+        {
+            case "ICAO":
+                return airArrivalService.GetAirline(airLine_IATA).AirlineICAO;
 
-		return null;
-	}
+            case "AirlineName":
+                return airArrivalService.GetAirline(airLine_IATA).AirlineName.Zh_tw;
+
+        }
+
+        return null;
+    }
+
+    public static string GetImgUrl(string width, string height,string text)
+    {
+        return string.Format("https://fakeimg.pl/{0}x{1}/?retina=1&text={2}&font=noto", width, height,text);
+    }
+
+    /// <summary>
+    /// 裁切字串
+    /// </summary>
+    /// <param name="str"></param>
+    /// <returns></returns>
+    ///
+    public static string CutString(string str, int num)
+    {
+        if (str == null)
+            return null;
+
+        if (str.Count() > num)
+            return str.Substring(0, num) + "...";
+        else
+            return str;
+    }
+
+
+    /// <summary>
+    /// url
+    /// </summary>
+    /// <param name="url"></param>
+    /// <param name="actionName"></param>
+    /// <param name="controllerName"></param>
+    /// <param name="routeValues"></param>
+    /// <returns></returns>
+    public static string AbsoluteAction(string actionName,
+       string controllerName, object routeValues)
+    {
+        UrlHelper url = new UrlHelper();
+
+        string scheme = url.RequestContext.HttpContext.Request.Url.Scheme;
+
+        return url.Action(actionName, controllerName, routeValues, scheme);
+    }
+
+    public static string StrForExport(string isExport)
+    {
+        switch (Convert.ToBoolean(isExport))
+        {
+            case true:
+                return "是";
+            case false:
+                return "否";
+        }
+        return null;
+    }
 }
+
+
+@helper ExecuteResultAlert(ExecuteResultModel result)
+{
+    if (null != result)
+    {
+        string message = string.Join("\\n", result.message);
+        <script>
+                alert('@message');
+        </script>
+    }
+}
+
+

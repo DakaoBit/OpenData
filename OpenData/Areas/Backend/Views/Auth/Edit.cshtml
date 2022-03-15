@@ -1,0 +1,74 @@
+﻿@model OpenData.Domain.ViewModels.Medicine.AnimalMedViewModel
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<section class="section">
+    <div class="container">
+        <div class="columns">
+            <div class="column">
+
+            </div>
+            <div class="column is-6">
+                @using (Html.BeginForm("Edit", "Auth", new { area = "Backend" }, FormMethod.Post, new { @class = "box" }))
+                {
+                    @Html.AntiForgeryToken();
+                    <div class="field">
+                        @Html.LabelFor(model => model.ChName, htmlAttributes: new { @class = "label" })
+                        <div class="control">
+                            @Html.EditorFor(model => model.ChName, new { htmlAttributes = new { @class = "input", @disabled="disabled" } })
+                        </div>
+                    </div>
+
+                    <div class="field">
+                        @Html.LabelFor(model => model.LicenseNum, htmlAttributes: new { @class = "label" })
+                        <div class="control">
+                            @Html.EditorFor(model => model.LicenseNum, new { htmlAttributes = new { @class = "input", @disabled = "disabled" } })
+                        </div>
+                    </div>
+
+                    <div class="field">
+                        @Html.LabelFor(model => model.Indications, htmlAttributes: new { @class = "label" })
+                        <div class="control">
+                            @Html.TextAreaFor(model => model.Indications, new { @id = "editor", @class = "ckeditor" })
+                        </div>
+                    </div>
+
+                    @Html.HiddenFor(model => model.PK)
+
+                    <button type="submit" class="button is-warning">送出</button>
+                }
+
+            </div>
+            <div class="column">
+
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://cdn.ckeditor.com/ckeditor5/33.0.0/classic/ckeditor.js"></script>
+<script>
+    ClassicEditor
+        .create(document.querySelector('#editor'), {
+	    })
+        .then(editor => {
+            console.log(editor);
+        })
+        .catch(error => {
+            console.error(error);
+        });
+</script>
+@*<script>
+        //CKEDITOR
+        CKEDITOR.replace('editor', {
+            height: 500,
+            allowedContent: true,
+            htmlEncodeOutput: true,
+            font_names: 'Arial;Arial Black;Comic Sans MS;Courier New;Tahoma;Times New Roman;Verdana;新細明體;細明體;標楷體;微軟正黑體',
+          /*  filebrowserImageUploadUrl: ''*/
+        });
+    </script>*@

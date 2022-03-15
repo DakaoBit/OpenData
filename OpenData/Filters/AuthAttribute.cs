@@ -10,7 +10,7 @@ namespace OpenData.Filters
     {
         protected override bool AuthorizeCore(HttpContextBase httpContext)
         {
-            if (httpContext.Session["SystemManager"] == null)
+            if (httpContext.Session["SystemUser"] == null)
                 return false;
             else
                 return true;
@@ -21,7 +21,7 @@ namespace OpenData.Filters
             if (!filterContext.HttpContext.User.Identity.IsAuthenticated)
             {
                 filterContext.Result = new RedirectToRouteResult(
-                    new System.Web.Routing.RouteValueDictionary(new { area = "Backend", controller = "Auth", action = "Login" })
+                    new System.Web.Routing.RouteValueDictionary(new { area = "", controller = "Medicine", action = "Login" })
                     );
             }
         }
@@ -31,7 +31,7 @@ namespace OpenData.Filters
             if (!filterContext.HttpContext.User.Identity.IsAuthenticated)
             {
                 filterContext.Result = new RedirectToRouteResult(
-                    new System.Web.Routing.RouteValueDictionary(new { area = "Backend", controller = "Auth", action = "Login" })
+                    new System.Web.Routing.RouteValueDictionary(new { area = "", controller = "Medicine", action = "Login" })
                     );
             }
         }

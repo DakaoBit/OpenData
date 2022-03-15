@@ -58,6 +58,7 @@
     <Compile Include="Services\EPA\AQIServiceTests.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>

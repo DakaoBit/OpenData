@@ -1,27 +1,27 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-	<meta http-equiv="Content-Type" content="text/html" charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>OpenData</title>
-	<link rel="icon" href="~/Assets/img/logo.ico" type="image/x-icon">
-	<meta name="keywords" content="" />
-	<meta name="description" content="" />
-	<meta name="subject" content="" />
-	<meta name="author" content="" />
-	<meta name="classification" content="" />
-	<meta name="coverage" content="Worldwide" />
-	<meta name="distribution" content="Global" />
-	<meta name="rating" content="General" />
-	@*@Styles.Render("~/Content/css")*@
-	<link href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.min.css" rel="stylesheet" />
-	<link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/css/bootstrap-grid.min.css" rel="stylesheet" />
+    <meta http-equiv="Content-Type" content="text/html" charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OpenData</title>
+    <link rel="icon" href="~/Assets/img/logo.ico" type="image/x-icon">
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    <meta name="subject" content="" />
+    <meta name="author" content="" />
+    <meta name="classification" content="" />
+    <meta name="coverage" content="Worldwide" />
+    <meta name="distribution" content="Global" />
+    <meta name="rating" content="General" />
+    @*@Styles.Render("~/Content/css")*@
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.min.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/css/bootstrap-grid.min.css" rel="stylesheet" />
     <link href="~/Assets/css/style.css" rel="stylesheet" />
-	<link href="https://fonts.googleapis.com/css?family=Noto+Sans+TC&display=swap" rel="stylesheet">
-	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.2/css/all.min.css" rel="stylesheet" />
-	<!-- datatables css -->
-	<link href="http://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Noto+Sans+TC&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.2/css/all.min.css" rel="stylesheet" />
+    <!-- datatables css -->
+    <link href="http://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css" rel="stylesheet" />
     <style>
         body {
             font-family: 'Noto Sans TC', sans-serif;
@@ -32,8 +32,7 @@
         .text-danger {
             color: darkred;
         }
- 
-	</style>
+    </style>
 </head>
 <body>
 
@@ -57,7 +56,23 @@
                 <a class="navbar-item">
                     OpenData
                 </a>
-
+                <div class="navbar-item has-dropdown is-hoverable">
+                    <a class="navbar-link">
+                        醫療
+                    </a>
+                    <div class="navbar-dropdown">
+                        <a href="@Url.Action("Index", "Medicine", new { area="" })" class="navbar-item">
+                            動物用藥資訊(ViewModel)
+                        </a>
+                        <a href="@Url.Action("InfiniteResult", "Medicine", new { area="" })" class="navbar-item">
+                            動物用藥資訊(AJax) - Infinite Scroll
+                        </a>
+                        @*<hr class="navbar-divider">
+                            <a class="navbar-item">
+                                Report an issue
+                            </a>*@
+                    </div>
+                </div>
                 <div class="navbar-item has-dropdown is-hoverable">
                     <a @*href="@Url.Action("Index", "EPA")"*@ class="navbar-link">
                         其他API應用
@@ -78,35 +93,51 @@
                             </a>*@
                     </div>
                 </div>
-
-
-                <div class="navbar-item has-dropdown is-hoverable">
-                    <a class="navbar-link">
-                        醫療
-                    </a>
-                    <div class="navbar-dropdown">
-                        <a href="@Url.Action("Index", "Medicine", new { area="" })" class="navbar-item">
-                            動物用藥資訊
-                        </a>
-                        @*<hr class="navbar-divider">
-                            <a class="navbar-item">
-                                Report an issue
-                            </a>*@
-                    </div>
-                </div>
             </div>
 
             <div class="navbar-end">
-                <div class="navbar-item">
-                    <div class="buttons">
-                        <a href="@Url.Action("Login", "Medicine", new { area=""})" class="button is-warning">
-                            <strong><i class="fa fa-user"></i>  登入</strong>
+                @if (null != Session["UserName"])
+                {
+                    <div class="navbar-item has-dropdown is-hoverable">
+                        <a class="navbar-link">
+                            @HttpUtility.HtmlDecode(@Session["UserName"].ToString())
                         </a>
-                        @*<a title="前往 GitHub" href="https://github.com/DakaoBit/OpenData" target="_blank" class="button is-warning">
-                            <strong><i class="fab fa-github-alt"></i>  GitHub</strong>
-                        </a>*@
+                        <div class="navbar-dropdown">
+                            <a href="@Url.Action("Index", "Auth", new { area="Backend" })" class="navbar-item">
+                                管理
+                            </a>
+                            <a href="@Url.Action("Logout", "Medicine", new { area="" })" class="navbar-item">
+                                登出
+                            </a>
+                        </div>
                     </div>
-                </div>
+                }
+                else
+                {
+                    <div class="navbar-item">
+                        <div class="buttons">
+
+                            @if (null != Session["SystemUser"])
+                            {
+                                <label class="button is-warning">
+                                    @HttpUtility.HtmlDecode(@Session["SystemUser"].ToString())
+                                </label>
+                            }
+                            else
+                            {
+                                <a href="@Url.Action("Login", "Medicine", new { area=""})" class="button is-warning">
+                                    <strong><i class="fa fa-user"></i>  登入</strong>
+                                </a>
+                            }
+
+                            @*<a title="前往 GitHub" href="https://github.com/DakaoBit/OpenData" target="_blank" class="button is-warning">
+                                    <strong><i class="fab fa-github-alt"></i>  GitHub</strong>
+                                </a>*@
+                        </div>
+                    </div>
+                }
+
+
             </div>
         </div>
     </nav>
@@ -138,9 +169,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
 
     <!-- datatables js -->
-    <script src="http://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
-    @RenderSection("scripts", required: false)
-
+    <script src="http://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+    @*@RenderSection("scripts", required: false)*@
     <script>
         $(document).ready(function () {
 

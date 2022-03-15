@@ -1,4 +1,5 @@
-﻿
+﻿@model IEnumerable<OpenData.Domain.ViewModels.Medicine.AnimalMedViewModel>
+@using OpenData.Helpers;
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -78,6 +79,7 @@ IG Style Card
 
     .article-card-body {
         padding: .5rem 1rem;
+        min-height:220px;
     }
 
     .article-card-title {
@@ -128,7 +130,7 @@ IG Style Card
         -webkit-box-pack: end;
         -ms-flex-pack: end;
         justify-content: flex-end;
-        margin-left: .5rem;
+        margin-left: 1rem;
         font-size: 1rem;
         color: #ffdd57;
         padding: 0 0 .5rem .5rem;
@@ -140,217 +142,84 @@ IG Style Card
     <div class="container">
         <h1 class="title">動物用藥資訊</h1>
         <div class="row">
-            <div class="col-md-4 col-sm-12">
-                <div class="article-card">
-                    <div class="article-card-bar">
-                        <div style="background-image: url(https://s.cdpn.io/profiles/user/144587/80.jpg?1);
+            @foreach (var item in Model)
+            {
+                <div class="col-md-4 col-sm-12">
+                    <div class="article-card mt-2">
+                        <div class="article-card-bar">
+                            <div style="background-image: url(https://s.cdpn.io/profiles/user/144587/80.jpg?1);
     background-size: cover;
     background-position: center center;
     background-repeat: no-repeat;" class="avatar-xxs">
 
-                        </div>
+                            </div>
 
-                        <div class="artile-bar-info">
-                            <span class="info-meta">
-                                <small>
-                                    <i class="fas fa-eye"></i> &nbsp
-                                </small>
-                                <small>
-                                    1,000
-                                </small>
-                            </span>
-                            <span class="info-meta">
-                                <small>
-                                    <i class="fas fa-comment-alt"></i> &nbsp
-                                </small>
-                                <small>
-                                    20
-                                </small>
-                            </span>
-                            <span class="info-meta">
-                                <small>
-                                    <i class="fas fa-bookmark"></i> &nbsp
-                                </small>
-                                <small>
-                                    100
-                                </small>
-                            </span>
+                            <div class="artile-bar-info">
+                                @*<span class="info-meta">
+                                    <small>
+                                        <i class="fas fa-eye"></i> &nbsp
+                                    </small>
+                                    <small>
+                                        1,000
+                                    </small>
+                                </span>
+                                <span class="info-meta">
+                                    <small>
+                                        <i class="fas fa-comment-alt"></i> &nbsp
+                                    </small>
+                                    <small>
+                                        20
+                                    </small>
+                                </span>
+                                <span class="info-meta">
+                                    <small>
+                                        <i class="fas fa-bookmark"></i> &nbsp
+                                    </small>
+                                    <small>
+                                        100
+                                    </small>
+                                </span>*@
+                            </div>
                         </div>
-                    </div>
-                    <div class="article-card-content">
-                        <div style="background-image: url('https://fakeimg.pl/500x200/?retina=1&text=AnimalMedicine&font=noto'); background-size: cover; background-position: center center; background-repeat: no-repeat;" class="article-card-cover">
-                            <img style="display:none;" src="https://fakeimg.pl/500x200/?retina=1&text=AnimalMedicine&font=noto">
-                        </div>
-                        <div class="article-card-body">
-                            <div class="article-card-title">
+                        <div class="article-card-content">
+                            <div style="background-image: url('@MyHelper.GetImgUrl("800","200",item.ChName)'); background-size: cover; background-position: center center; background-repeat: no-repeat;" class="article-card-cover">
+                                <img style="display:none;" src="@MyHelper.GetImgUrl("800","200",item.ChName)">
+                            </div>
+                            <div class="article-card-body">
+                                <div class="article-card-title">
 
-                                <h5>Sakura Places</h5>
+                                    <h5>@item.EnName</h5>
 
-                                <div class="article-project-time">
-                                    <time>2019/05/21 08:00</time>
+                                    <div class="article-project-time">
+                                        <time>核發日期: @item.IssueDate</time>
+                                        <br />
+                                        <time>有效期間: @item.ValidPeriod</time>
+                                        @*<time>2019/05/21 08:00</time>*@
+                                    </div>
 
                                 </div>
-
-                            </div>
-                            <div class="article-info-reward-list">
-                                <div rel="public" title="public" class="article-info-reward">
-                                    <div class="article-info-reward-title">public</div>
+                                <div class="article-info-reward-list">
+                                    <div rel="public" title="public" class="article-info-reward">
+                                        <div class="article-info-reward-title">@item.LicenseNum</div>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="article-card-desciption">
-                                <p class="">
-                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum dolores eveniet eaque ab ipsa vitae id tempora, similique assumenda! Obcaecati necessitatibus temporibus aut quidem assumenda rem aspernatur quos? Animi, recusandae.
-                                </p>
-                                <div id="btn" class="article-card-btn">
-                                    <i class="fas fa-bookmark"></i>
+                                <div class="article-card-desciption">
+                                    <p class="">
+                                        <span>公司名稱: @item.CompanyName</span>
+                                        <br />
+                                        <span>公司地址: @item.CompanyAddress</span>
+                                        <br />
+                                        <a href="@Html.UrlLink(HttpContext.Current.Request,"Detail","Medicine",new {area="", id= item.PK} )"><span>閱讀更多</span></a>
+                                    </p>
+                                    <div id="btn" class="article-card-btn">
+                                        <i class="fas fa-bookmark"></i>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-
-            </div>
-            <div class="col-md-4 col-sm-12">
-                <div class="article-card">
-                    <div class="article-card-bar">
-                        <div style="background-image: url(https://s.cdpn.io/profiles/user/144587/80.jpg?1);
-    background-size: cover;
-    background-position: center center;
-    background-repeat: no-repeat;" class="avatar-xxs">
-
-                        </div>
- 
-                        <div class="artile-bar-info">
-                            <span class="info-meta">
-                                <small>
-                                    <i class="fas fa-eye"></i> &nbsp
-                                </small>
-                                <small>
-                                    1,000
-                                </small>
-                            </span>
-                            <span class="info-meta">
-                                <small>
-                                    <i class="fas fa-comment-alt"></i> &nbsp
-                                </small>
-                                <small>
-                                    20
-                                </small>
-                            </span>
-                            <span class="info-meta">
-                                <small>
-                                    <i class="fas fa-bookmark"></i> &nbsp
-                                </small>
-                                <small>
-                                    100
-                                </small>
-                            </span>
-                        </div>
-                    </div>
-                    <div class="article-card-content">
-                        <div style="background-image: url('https://fakeimg.pl/500x200/?retina=1&text=AnimalMedicine&font=noto'); background-size: cover; background-position: center center; background-repeat: no-repeat;" class="article-card-cover">
-                            <img style="display:none;" src="https://fakeimg.pl/500x200/?retina=1&text=AnimalMedicine&font=noto">
-                        </div>
-                        <div class="article-card-body">
-                            <div class="article-card-title">
-
-                                <h5>Sakura Places</h5>
-
-                                <div class="article-project-time">
-                                    <time>2019/05/21 08:00</time>
-
-                                </div>
-
-                            </div>
-                            <div class="article-info-reward-list">
-                                <div rel="public" title="public" class="article-info-reward">
-                                    <div class="article-info-reward-title">public</div>
-                                </div>
-                            </div>
-                            <div class="article-card-desciption">
-                                <p class="">
-                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum dolores eveniet eaque ab ipsa vitae id tempora, similique assumenda! Obcaecati necessitatibus temporibus aut quidem assumenda rem aspernatur quos? Animi, recusandae.
-                                </p>
-                                <div id="btn" class="article-card-btn">
-                                    <i class="fas fa-bookmark"></i>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-            <div class="col-md-4 col-sm-12">
-                <div class="article-card">
-                    <div class="article-card-bar">
-                        <div style="background-image: url(https://s.cdpn.io/profiles/user/144587/80.jpg?1);
-    background-size: cover;
-    background-position: center center;
-    background-repeat: no-repeat;" class="avatar-xxs">
-
-                        </div>
-
-                        <div class="artile-bar-info">
-                            <span class="info-meta">
-                                <small>
-                                    <i class="fas fa-eye"></i> &nbsp
-                                </small>
-                                <small>
-                                    1,000
-                                </small>
-                            </span>
-                            <span class="info-meta">
-                                <small>
-                                    <i class="fas fa-comment-alt"></i> &nbsp
-                                </small>
-                                <small>
-                                    20
-                                </small>
-                            </span>
-                            <span class="info-meta">
-                                <small>
-                                    <i class="fas fa-bookmark"></i> &nbsp
-                                </small>
-                                <small>
-                                    100
-                                </small>
-                            </span>
-                        </div>
-                    </div>
-                    <div class="article-card-content">
-                        <div style="background-image: url('https://fakeimg.pl/500x200/?retina=1&text=AnimalMedicine&font=noto'); background-size: cover; background-position: center center; background-repeat: no-repeat;" class="article-card-cover">
-                            <img style="display:none;" src="https://fakeimg.pl/500x200/?retina=1&text=AnimalMedicine&font=noto">
-                        </div>
-                        <div class="article-card-body">
-                            <div class="article-card-title">
-
-                                <h5>Sakura Places</h5>
-
-                                <div class="article-project-time">
-                                    <time>2019/05/21 08:00</time>
-
-                                </div>
-
-                            </div>
-                            <div class="article-info-reward-list">
-                                <div rel="public" title="public" class="article-info-reward">
-                                    <div class="article-info-reward-title">public</div>
-                                </div>
-                            </div>
-                            <div class="article-card-desciption">
-                                <p class="">
-                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum dolores eveniet eaque ab ipsa vitae id tempora, similique assumenda! Obcaecati necessitatibus temporibus aut quidem assumenda rem aspernatur quos? Animi, recusandae.
-                                </p>
-                                <div id="btn" class="article-card-btn">
-                                    <i class="fas fa-bookmark"></i>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-         
+            }
+        </div>   
     </div>
 </section>

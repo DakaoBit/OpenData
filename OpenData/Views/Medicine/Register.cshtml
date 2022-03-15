@@ -5,12 +5,14 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+@MyHelper.ExecuteResultAlert(TempData["ExecuteResult"] as OpenData.Domain.ViewModels.Medicine.ExecuteResultModel)
+
 <section class="section is-medium">
     <div class="columns">
         <div class="column">
         </div>
         <div class="column">
-            @using (Html.BeginForm("Register", "Medicine", new { area = "" }, FormMethod.Post))
+            @using (Html.BeginForm("Register", "Medicine", new { area = "" }, FormMethod.Post, new { @class = "box" }))
             {
                 @Html.AntiForgeryToken()
 
@@ -29,16 +31,16 @@
                     </div>
                 </div>
                 <div class="field">
-                    @Html.LabelFor(model => model.NewPassword, htmlAttributes: new { @class = "label" })
+                    @Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "label" })
                     <div class="control">
-                        @Html.TextBoxFor(m => m.NewPassword, "", new { @class = "input", @placeholder = "請輸入密碼" })
-                        @Html.ValidationMessageFor(model => model.NewPassword, "", new { @class = "text-danger" })
+                        @Html.TextBoxFor(m => m.Password, "", new { @class = "input", @placeholder = "請輸入密碼", @type = "password" })
+                        @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
                     </div>
                 </div>
                 <div class="field">
                     @Html.LabelFor(model => model.ConfirmPassword, htmlAttributes: new { @class = "label" })
                     <div class="control">
-                        @Html.TextBoxFor(m => m.ConfirmPassword, "", new { @class = "input", @placeholder = "請重新輸入密碼" })
+                        @Html.TextBoxFor(m => m.ConfirmPassword, "", new { @class = "input", @placeholder = "請重新輸入密碼", @type = "password" })
                         @Html.ValidationMessageFor(model => model.ConfirmPassword, "", new { @class = "text-danger" })
                     </div>
                 </div>

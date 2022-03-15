@@ -13,8 +13,47 @@
 </section>
 
  <section class="section">
+     <div class="container">
+         <h1 class="title">應用 1：動物用藥資訊</h1>
+         <div class="columns">
+             <div class="column">
+                 <div class="card">
+                     <header class="card-header">
+                         <p class="card-header-title">
+                             簡介
+                         </p>
+                     </header>
+                     <div class="card-content">
+                         <div class="content">
+                             <ul>
+                                 <li>以行政院農業委員會提供的動物用藥資訊，結合.NET MVC的基本應用。</li>
+                                 <li>基本的CRUD運用 - 文字編輯器 & ViewModel & Custom Helper...</li>
+                                 <li>Infinite Scroll - Custom JsonResult & Ajax</li>
+                                 <li>基本會員登入註冊功能 - Model Binding, 資料驗證, ActionFilter...</li>
+                             </ul>
+
+                             <hr>
+                             ※運用：
+                             <ol>
+                                 <li>.NET MVC: Area, Model Binding, 資料驗證, Html Helper, ActionFilter, ActionAttribute, CustomActionResult, ViewModel, ViewData, TempData, Template</li>
+								 <li>EF, Json.NET, LINQ</li>
+                                 <li>DI</li>
+                                 <li>JS：DataTable, JS</li>
+                             </ol>
+                         </div>
+                     </div>
+                     <footer class="card-footer">
+                         <a href="@Url.Action("Index", "Medicine", new { area="" })" class="card-footer-item">一般頁面</a>
+                         <a href="@Url.Action("InfiniteResult", "Medicine", new { area="" })" class="card-footer-item">Infinite Scroll</a>
+                     </footer>
+                 </div>
+             </div>
+		 </div>
+     </div>
+ </section>
+ <section class="section">
 	 <div class="container">
-	 	<h1 class="title">應用 1：空氣監測品質 AQI</h1>
+	 	<h1 class="title">應用 2：空氣監測品質 AQI</h1>
 	 	<div class="columns">
 	 		<div class="column">
 				<div class="card">
@@ -31,16 +70,16 @@
 							</ul>
  
 							<hr>
-							※運用技術：
+							※運用：
 							<ol>
 								<li>.NET MVC, Json.NET, LINQ</li>
 								<li>DI</li>
-								<li>JS：Google Maps</li>
+								<li>JS：Google Maps, Ajax, JS</li>
 							</ol>
 						</div>
 					</div>
 					<footer class="card-footer">
-						<a href="@Url.Action("AQI", "EPA")" class="card-footer-item">前往頁面</a>
+						<a href="@Url.Action("AQI", "EPA", new { area="" })" class="card-footer-item">前往頁面</a>
 					</footer>
 				</div>
 	 		</div>
@@ -54,7 +93,7 @@
 
  <section class="section">
 	 <div class="container">
-		 <h1 class="title">應用 2：台灣機場即時入境航班查詢</h1>
+		 <h1 class="title">應用 3：台灣機場即時入境航班查詢</h1>
 		 <div class="columns">
 		 	<div class="column">
 		 		<img class="image" src="~/Assets/img/PTX_AirArrival.png" alt="Alternate Text" />
@@ -74,7 +113,7 @@
 		 					</ul>
 
 		 					<hr>
-		 					※運用技術：
+		 					※運用：
 		 					<ol>
 								<li>.NET MVC, Json.NET, LINQ</li>
 		 						<li>DI</li>
@@ -83,7 +122,7 @@
 		 				</div>
 		 			</div>
 		 			<footer class="card-footer">
-		 				<a href="@Url.Action("Airport", "PTX")" class="card-footer-item">前往頁面</a>
+		 				<a href="@Url.Action("Airport", "PTX", new { area="" })" class="card-footer-item">前往頁面</a>
 		 			</footer>
 		 		</div>
 		 	</div>

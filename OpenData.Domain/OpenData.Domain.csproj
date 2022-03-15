@@ -94,6 +94,7 @@
     <Compile Include="ViewModels\EPA\AQIViewModel.cs" />
     <Compile Include="ViewModels\Medicine\AnimalMedViewModel.cs" />
     <Compile Include="ViewModels\Medicine\ExecuteResultModel.cs" />
+    <Compile Include="ViewModels\Medicine\UserDataViewModel.cs" />
     <Compile Include="ViewModels\Medicine\UserRegisterViewModel.cs" />
     <Compile Include="ViewModels\Medicine\LoginViewModel.cs" />
     <Compile Include="ViewModels\PTX\Air_AirlineViewModel.cs" />

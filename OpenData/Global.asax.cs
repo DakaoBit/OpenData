@@ -18,6 +18,9 @@ namespace OpenData
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+
+            //allow html
+            ModelMetadataProviders.Current = new DataAnnotationsModelMetadataProvider();
         }
     }
 }

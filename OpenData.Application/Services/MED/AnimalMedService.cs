@@ -7,19 +7,25 @@ using Newtonsoft.Json;
 using OpenData.Application.Interface.MED;
 using OpenData.Domain.ViewModels.Medicine;
 using OpenData.Domain;
+using System.Web;
+using AutoMapper;
+using System.Linq.Expressions;
+using Microsoft.Security.Application;
 
 namespace OpenData.Application.Services.MED
 {
     public class AnimalMedService : IMedicineService, IDisposable
     {
         private OpenDataEntities db;
+        private ExecuteResultModel result;
 
         public AnimalMedService()
         {
             db = new OpenDataEntities();
+            result = new ExecuteResultModel();
         }
 
-        public void AddMedicine(IEnumerable<AnimalMedViewModel> viewModel) 
+        public void AddMedicine(IEnumerable<ChAnimalMedViewModel> viewModel)
         {
             bool IsExport = false;
             foreach (var item in viewModel)
@@ -62,28 +68,202 @@ namespace OpenData.Application.Services.MED
                 }
                 catch (System.Data.Entity.Validation.DbEntityValidationException ex)
                 {
-
                     throw ex;
                 }
             }
 
-           
+
         }
 
-        public AnimalMedViewModel GetMedicine(Func<AnimalMedViewModel, bool> filter)
+        public AnimalMedViewModel GetMedicine(int id)
         {
-            throw new NotImplementedException();
+            var aniMed = db.XT_AnimalMedicine.Find(id);
+
+            var config = new MapperConfiguration(cfg =>
+          cfg.CreateMap<XT_AnimalMedicine, AnimalMedViewModel>());
+
+            var mapper = new Mapper(config);
+            return mapper.Map<AnimalMedViewModel>(aniMed);
+        }
+
+        public bool GetMedicine(Func<XT_AnimalMedicine, bool> filter)
+        {
+            return db.XT_AnimalMedicine.Where(filter).Any();
         }
 
         public List<AnimalMedViewModel> GetMedicines()
         {
-            throw new NotImplementedException();
+            var list = db.XT_AnimalMedicine.ToList();
+
+            var config = new MapperConfiguration(cfg =>
+            cfg.CreateMap<XT_AnimalMedicine, AnimalMedViewModel>());
+
+            var mapper = new Mapper(config);
+            return mapper.Map<List<AnimalMedViewModel>>(list);
         }
 
         public List<AnimalMedViewModel> GetMedicines(Func<AnimalMedViewModel, bool> filter)
         {
             throw new NotImplementedException();
         }
+
+        public ExecuteResultModel Update(HttpContext context, AnimalMedViewModel viewModel)
+        {
+            UserDataViewModel user = (UserDataViewModel)context.Session["SystemUser"];
+            int status = 0;
+            XT_AnimalMedicine aniMed = db.XT_AnimalMedicine.Find(viewModel.PK);
+            aniMed.Indications = Sanitizer.GetSafeHtmlFragment(viewModel.Indications);
+            aniMed.EditUser = user.UserID;
+            aniMed.EditDate = DateTime.Now;
+
+            try
+            {
+                status = db.SaveChanges();
+            }
+            catch (System.Data.Entity.Validation.DbEntityValidationException ex)
+            {
+                throw ex;
+            }
+
+            if (status > 0)
+            {
+                result.isSuccess = true;
+                result.message.Add(string.Format("品名: {0} 編輯成功!", viewModel.ChName));
+            }
+            else
+            {
+                result.isSuccess = false;
+                result.message.Add("編輯失敗");
+            }
+
+            return result;
+        }
+
+        public ExecuteResultModel Delete(int id)
+        {
+            var aniMed = db.XT_AnimalMedicine.Find(id);
+
+            try
+            {
+                db.XT_AnimalMedicine.Remove(aniMed);
+                db.SaveChanges();
+
+                result.isSuccess = true;
+                result.message.Add("刪除成功!");
+            }
+            catch (System.Data.Entity.Validation.DbEntityValidationException ex)
+            {
+                result.isSuccess = false;
+                result.message.Add(String.Format("Error: {0}, {1}", ex.Message, ex.StackTrace));
+                throw ex;
+            }
+
+            return result;
+        }
+
+        #region Login
+        public UserDataViewModel UserData(Func<XT_User, bool> filter)
+        {
+           var user = db.XT_User.Where(filter).FirstOrDefault();
+           var config = new MapperConfiguration(cfg =>
+              cfg.CreateMap<XT_User, UserDataViewModel>()
+             );
+
+           var mapper = new Mapper(config);
+           return mapper.Map<UserDataViewModel>(user);
+        }
+
+        public ExecuteResultModel LoginAuth(HttpContext context, LoginViewModel viewModel)
+        {
+            var user = db.XT_User
+                 .Where(o => o.UserID == viewModel.UserID)
+                 .Where(o => o.Password == viewModel.Password)
+                 .FirstOrDefault();
+
+            if (null == user)
+            {
+                var pUser = db.XT_User
+               .Where(o => o.UserID == viewModel.UserID.Trim())
+               .FirstOrDefault();
+
+                if (null != pUser)
+                {
+                    result.isSuccess = false;
+                    result.message.Add("密碼錯誤!");
+                }
+                else
+                {
+                    result.isSuccess = false;
+                    result.message.Add("無此帳號，請重新登入!");
+                }
+                return result;
+            }
+            else
+            {
+                context.Session["SystemUser"] =  UserData(o => o.PK == user.PK);
+                context.Session["UserName"] = UserData(o => o.PK == user.PK).Name;
+                result.isSuccess = true;
+                result.message.Add("歡迎登入!");
+                return result;
+            }
+        }
+        #endregion
+
+        #region Register
+        public ExecuteResultModel Register(UserRegisterViewModel viewModel)
+        {
+            int status = 0;
+            if (IsUserID(viewModel.UserID))
+            {
+                result.isSuccess = false;
+                result.message.Add("該帳號已有人使用");
+
+                return result;
+            }
+            else
+            {
+                var config = new MapperConfiguration(cfg =>
+                 cfg.CreateMap<UserRegisterViewModel, XT_User>()
+                );
+
+                var mapper = new Mapper(config);
+                var user = mapper.Map<XT_User>(viewModel);
+
+                try
+                {
+                    db.XT_User.Add(user);
+                    status = db.SaveChanges();
+                }
+                catch (System.Data.Entity.Validation.DbEntityValidationException ex)
+                {
+                    result.isSuccess = false;
+                    result.message.Add(String.Format("Error: {0}, {1}", ex.Message, ex.StackTrace));
+                    throw ex;
+                }
+
+                if (status > 0)
+                {
+                    result.isSuccess = true;
+                    result.message.Add("註冊成功");
+                    result.message.Add("請重新登入");
+                    return result;
+                }
+                else
+                {
+                    result.isSuccess = false;
+                    result.message.Add("新增失敗");
+                    return result;
+                }
+            }
+        }
+
+        public bool IsUserID(string userid)
+        {
+            return db.XT_User.Where(o => o.UserID == userid).Any();
+        }
+
+
+        #endregion
 
         #region IDisposable Support
         private bool disposedValue = false; // 偵測多餘的呼叫
